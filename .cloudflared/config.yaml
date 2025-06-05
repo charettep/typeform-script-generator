@@ -1,0 +1,7 @@
+tunnel: typeform-script-generator
+credentials-file: /home/YOUR-USER/.cloudflared/typeform-script-generator.json
+
+ingress:
+  - hostname: webhook.frnknstn.com
+    service: http://localhost:5000
+  - service: http_status:404

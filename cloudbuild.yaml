@@ -1,0 +1,13 @@
+steps:
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 'gcr.io/$PROJECT_ID/typeform-script-generator', '.']
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'gcr.io/$PROJECT_ID/typeform-script-generator']
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: gcloud
+    args: ['run', 'deploy', 'typeform-script-generator',
+           '--image', 'gcr.io/$PROJECT_ID/typeform-script-generator',
+           '--platform', 'managed',
+           '--region', 'us-central1',
+           '--allow-unauthenticated',
+           '--port', '5000']
